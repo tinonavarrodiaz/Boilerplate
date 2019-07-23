@@ -1,0 +1,60 @@
+/*
+  This boilerplate is based in ITCSS and SMACSS
+*/
+
+// Variables de personalizacion de ed-grid
+
+// $breakpoints : (
+//   s  : 0,
+//   m  : 640px,
+//   lg : 1024px,
+//   xl : 1440px
+// );
+
+// $prototype        : true;         // Activa los estilos de prototipado
+// $dev              : false;        // Activa los estilos para debuggin
+// $max-width        : 1200px;       // Ancho máximo de los contenedores ed-container y ed-grid
+// $l-unit           : .5rem;        // Unidad básica de layout (para separaciones verticales, margin y padding)
+// $gap              : $l-unit * 4;  // Separación entre columnas (2rem)
+// $legacy           : false;        // Soporte para versiones antiguas
+// $container        : ed-container; // Clase para el contenedor (core flexbox)
+// $item             : ed-item;      // Clase para los items (core flexbox)
+// $max-grid-columns : 12;           // Máximo número de columnas (core css grid)
+// $fractions        : 3 6;          // Fracciones para crear columnas (core flexbox)
+
+// Config
+@import "config/functions";
+@import "config/variables";
+@import "config/mixins";
+
+
+//EDGrid
+@import "~ed-grid/ed-grid";
+
+// Hamburgers Menu
+@import "~hamburgers/dist/hamburgers.min.css";
+
+// Base and elements (generic)
+@import "base/base";
+
+// LAYOUT
+  // Escribe solo los estilos de layout (division en regiones del viewport)
+@import "layout/layout";
+
+// MODULOS (SMACSS) O COMPONENTES (ITCSS)
+  // Son los elementos de UI de tu interfaz, como botones, tablas, menus, etc.
+  // Crea los archivos adicionales que necesites (uno por componente)
+@import "components/buttons";
+@import "components/menus";
+
+// Theme (colors and fonts)
+@import "theme/typography";
+
+// Utilities (hacks)
+  // Todos los hacks que hayas necesitado para solucionar conflictos
+  // o resolver situaciones extremas. Se espera poder mejorarlos luego.
+@import "hacks/hacks";
+
+body{
+  
+}
