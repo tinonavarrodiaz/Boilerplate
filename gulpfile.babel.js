@@ -20,7 +20,7 @@ import tildeImporter from 'node-sass-tilde-importer'
 
 sass.compiler= require('node-sass')
 
-const siteurl = 'http://example.com'
+const siteurl = 'http://iatrikos.com/m/'
 
 const server = browserSync.create()
 
@@ -65,7 +65,7 @@ const stylesBuild = ()=>{
     .pipe(postcss(
       [
         cssnano({
-          core: true,
+          core: false,
           zindex: false,
           autoprefixer: {
             add: true,
@@ -95,6 +95,7 @@ const pugBuild = ()=>{
     gulp.src('./src/pug/pages/**/*.pug')
     .pipe(plumber())
     .pipe(pug({
+      pretty: true,
       basedir: './src/pug'
     }))
     .pipe(gulp.dest('./public'))
@@ -184,7 +185,7 @@ const setemap = ()=>{
       read: false
     })
       .pipe(sitemap({
-        siteUrl: siteurl // remplazar por tu dominio
+        siteUrl: 'http://iatrikos.com' // remplazar por tu dominio
       }))
       .pipe(gulp.dest('./public'))
   )
@@ -219,15 +220,15 @@ gulp.task('dev', gulp.series(stylesDev,scriptsDev,pugDev,imagesDev,assets,(done)
       baseDir: './public'
     }
   })
-  gulp.watch('./src/scss/**/**', gulp.series(stylesDev))
-  gulp.watch('./src/pug/**/**', gulp.series(pugDev,server.reload))
+  gulp.watch('./src/scss/**/**').on('change', gulp.series(stylesDev))
+  gulp.watch('./src/pug/**/**').on('change', gulp.series(pugDev,server.reload))
   gulp.watch('./src/js/**/**').on('change', gulp.series(scriptsDev,server.reload))
   gulp.watch('./src/img/**/**', gulp.series(imagesDev,server.reload))
   gulp.watch('./src/assets/**/**', gulp.series(assets,server.reload))
   done()
 }))
 
-gulp.task('build', gulp.series(stylesBuild,pugBuild,scriptsBuild,imagesBuild,assets,sitemap,cache))
+gulp.task('build', gulp.series(stylesBuild,pugBuild,scriptsBuild,imagesBuild,cache,assets,sitemap))
 
 
 exports.stylesDev = stylesDev
